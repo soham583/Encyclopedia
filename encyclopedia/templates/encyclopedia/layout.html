@@ -1,0 +1,64 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <title>{% block title %}{% endblock %}</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link href="{% static 'encyclopedia/styles.css' %}" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <style>
+            form.search button {
+              float: left;
+              width: 15%;
+              padding: 3px;
+              padding-bottom:4px;
+              background: #2196F3;
+              color: white;
+              font-size: 17px;
+              border: 1px solid grey;
+              border-left: none; /* Prevent double borders */
+              cursor: pointer;
+            }
+            form.search input[type="text"]{
+
+                  border: 1px solid grey;
+                  float: left;
+                  padding:2px;
+                  width: 85%;
+
+            }
+           body {
+                width:95%;
+                height:100%;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="row">
+            <div class="sidebar col-lg-2 col-md-3">
+                <h2>Wiki</h2>
+                <form class="search" action="{% url 'encyclopedia:search' %}" method="get">
+                    <input class="search1" type="text" name="q" placeholder="Search Encyclopedia">
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                </form>
+                <div>
+                    <a href="{% url 'encyclopedia:index' %}">Home</a>
+                </div>
+                <div>
+                    <a href="{% url 'encyclopedia:newm' %}">Create New Page</a>
+                </div>
+                <div>
+                    <a href="{% url 'encyclopedia:ranm' %}">Random Page</a>
+                </div>
+                {% block nav %}
+                {% endblock %}
+            </div>
+            <div class="main col-lg-10 col-md-9">
+                {% block body %}
+                {% endblock %}
+            </div>
+        </div>
+    </body>
+</html>
